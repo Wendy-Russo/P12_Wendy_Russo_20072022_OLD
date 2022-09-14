@@ -7,62 +7,61 @@ import proteinesIcon from "../../../data/icons/proteine.svg"
 import glucidesIcon from  "../../../data/icons/glucides.svg"
 import lipidesIcon from   "../../../data/icons/lipides.svg"
 
-let color;
+let color = -1;
 let iconToUse = proteinesIcon;
 let unit;
 
-async function fun() {
-  return fetch("http://localhost:3000/user/12/")
-    .then(response => response.json())
-    .then(user => user.data)
-    .then(data => {return data});
-}
 
+/**
+ * 
+ * Can create 4 different nutrient cards with different colors, icons, units and quantities (see maquette)
+ * 
+ * @param {object} props - must have both "props.nutrient" and "props.quantity" propreties 
+ * 
+ * @returns {object} returns the created JSX object 
+ * 
+ */
 function NutrientCard(props) {
 
-  const [userData,setUserData] = useState(0);
-
-  /*useEffect(() => {
-    fun().then(result => setUserData(result));
-  });*/
-
-  //console.log("CARD",userData);
-
   const NUTRIENT = props.nutrient;
-  const QUANTITY = props.quantity;
-  const UNIT = props.unit;
+  const QUANTITY = props.quantity;  
 
-  switch (NUTRIENT) {
-    case "calories":
-      color = "red" ;
-      iconToUse = caloriesIcon;
-      unit = "kCal";
-      break;
-    case "proteines":
-      color = "blue" ;
-      iconToUse = proteinesIcon;
-      unit = "g";
-      break;
-    case "glucides":
-      color = "orange" ;
-      iconToUse = glucidesIcon;
-      unit = "g";
-      break;
-    case "lipides":
-      color = "pink" ;
-      iconToUse = lipidesIcon;
-      unit = "g";
-      break;
-    default:
-      color = "red" ;
-      iconToUse = caloriesIcon;
-      unit = "g";
-      break;
-  }
+  if(NUTRIENT && QUANTITY){
+    
+    
+    
+    //console.log(props)
 
-  return(
-
-    <>
+    switch (NUTRIENT) {
+      case "calories":
+        color = "red" ;
+        iconToUse = caloriesIcon;
+        unit = "kCal";
+        break;
+      case "proteines":
+        color = "blue" ;
+        iconToUse = proteinesIcon;
+        unit = "g";
+        break;
+      case "glucides":
+        color = "orange" ;
+        iconToUse = glucidesIcon;
+        unit = "g";
+        break;
+      case "lipides":
+        color = "pink" ;
+        iconToUse = lipidesIcon;
+        unit = "g";
+        break;
+      default:
+        color = "red" ;
+        iconToUse = caloriesIcon;
+        unit = "g";
+        break;
+    }
+  
+    return(
+  
       <div className='card'>
         <div className={"iconContainer " + color}>
           <img className='nutrientIcon' src={iconToUse}/>
@@ -71,8 +70,9 @@ function NutrientCard(props) {
         <p className='nutrient'>{NUTRIENT[0].toUpperCase()+NUTRIENT.substring(1)}</p>
       </div>
 
-    </>
-  )
+    )
+  }
+
 }
 
 export default NutrientCard

@@ -19,7 +19,7 @@ function BarChartDailyActivity(props) {
 
   if(!document.querySelector(".barChart-svg") && SESSIONS){
 
-    console.log(SESSIONS)
+    //console.log(SESSIONS)
 
     let calorieMax = SESSIONS[0].calories;
     for (let id = 0; id < SESSIONS.length-1; id++) {

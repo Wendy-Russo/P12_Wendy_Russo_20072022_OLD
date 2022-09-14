@@ -8,20 +8,10 @@ import BarChartDailyActivity from '../components/Charts/BarChartDailyActivity/Ba
 import PieChartScore from "../components/Charts/PieChartScore/PieChartScore"
 import RadialChart from '../components/Charts/RadialChart/RadialChart';
 import LineChart from '../components/Charts/LineChart/LineChart';
+import {getUserData} from '../service/getUserData';
 
 const USER = 12; //12 or 18
 
-const URL_MAIN = `http://localhost:3000/user/${USER}`;
-const URL_ACTIVITY = `http://localhost:3000/user/${USER}/activity`;
-const URL_PERF = `http://localhost:3000/user/${USER}/performance `;
-const URL_AVERAGE = `http://localhost:3000/user/${USER}/average-sessions`;
-
-async function fun(url){
-  const RESPONSE = await fetch(url);
-  const JSON = await RESPONSE.json();
-  const DATA = await JSON.data;
-  return DATA;
-}
 function Dashboard(){
 
   const [mainData, setMainData] = useState(0);
@@ -30,10 +20,10 @@ function Dashboard(){
   const [averageData, setAverageData] = useState(0);
 
   useEffect(() => {
-    fun(URL_MAIN).then(DATA => setMainData(DATA));
-    fun(URL_ACTIVITY).then(DATA => setActivityData(DATA));
-    fun(URL_PERF).then(DATA => setPerfData(DATA));
-    fun(URL_AVERAGE).then(DATA => setAverageData(DATA));
+    getUserData(USER,"main").then(DATA => setMainData(DATA));
+    getUserData(USER,"activity").then(DATA => setActivityData(DATA));
+    getUserData(USER,"performance").then(DATA => setPerfData(DATA));
+    getUserData(USER,"average").then(DATA => setAverageData(DATA));
   }, [])
 
   const FIRST_NAME = mainData.userInfos ? mainData.userInfos.firstName : "";

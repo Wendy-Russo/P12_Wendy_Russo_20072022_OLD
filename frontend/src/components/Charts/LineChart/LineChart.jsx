@@ -94,7 +94,7 @@ function LineChart(props) {
       AVG_MIN = Math.min(AVG_MIN,MIN);
     }
 
-    console.log(AVERAGE.sessions[0].sessionLength)
+    //console.log(AVERAGE.sessions[0].sessionLength)
     
     const GRAPH_HEIGHT = 100;
     const SCALE = -(GRAPH_HEIGHT / (AVG_MAX - AVG_MIN));

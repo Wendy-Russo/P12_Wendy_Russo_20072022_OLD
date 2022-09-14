@@ -7,7 +7,7 @@
 * The backend for this project (https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)
 * Npm (latest version recommended)
 
-### Prerequisites
+### Recommendations
 
 * Visual Studio Code (latest version at https://code.visualstudio.com/Download )
 * Installation

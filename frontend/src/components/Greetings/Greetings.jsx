@@ -1,26 +1,46 @@
 import React from 'react';
-
 import './Greetings.scss';
 
+/**
+ * Creates a welcome message for the user  (see maquette)
+ * @param {object} props - "props.firstName" must be the name of the user
+ * @returns {object} returns the created JSX object 
+ */
 function Greetings(props) {
-  const FIRST_NAME = props.firstName;
+  let firstName = props.firstName;
 
-  return(
+  if(firstName !== -1){
 
-    <>
-      <section className="greetings-section" >
-        <h2 className='welcome'>
-          Bonjour
-          <em>
-            {" " + FIRST_NAME}
-          </em>
-        </h2>
-        <p>
-          Félicitations ! Vous avez explosé vos objectifs hier 👏
-        </p>
-      </section>
-    </>
-  )
+    return(
+      <>
+        <section className="greetings-section" >
+          <h2 className='welcome'>
+            Bonjour
+            <em>
+              {" " + firstName}
+            </em>
+          </h2>
+          <p>
+            Félicitations ! Vous avez explosé vos objectifs hier 👏
+          </p>
+        </section>
+      </>
+    )
+
+  }
+  else{
+
+    return(
+      <>
+        <section className="greetings-section" >
+          <span className='error-message'>
+            ERROR, couldn't fetch first name
+          </span>
+        </section>
+      </>
+    )
+
+  }
 }
 
 export default Greetings

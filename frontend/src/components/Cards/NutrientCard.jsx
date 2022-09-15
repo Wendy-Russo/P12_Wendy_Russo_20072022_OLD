@@ -2,31 +2,26 @@ import React, { useState, useEffect }  from 'react';
 import './NutrientCard.scss';
 
 
-import caloriesIcon from  "../../../data/icons/calories.svg"
-import proteinesIcon from "../../../data/icons/proteine.svg"
-import glucidesIcon from  "../../../data/icons/glucides.svg"
-import lipidesIcon from   "../../../data/icons/lipides.svg"
+import caloriesIcon from  "../../data/icons/calories.svg"
+import proteinesIcon from "../../data/icons/proteine.svg"
+import glucidesIcon from  "../../data/icons/glucides.svg"
+import lipidesIcon from   "../../data/icons/lipides.svg"
 
 let color = -1;
 let iconToUse = proteinesIcon;
 let unit;
 
-
 /**
- * 
  * Can create 4 different nutrient cards with different colors, icons, units and quantities (see maquette)
- * 
  * @param {object} props - must have both "props.nutrient" and "props.quantity" propreties 
- * 
  * @returns {object} returns the created JSX object 
- * 
  */
 function NutrientCard(props) {
 
   const NUTRIENT = props.nutrient;
   const QUANTITY = props.quantity;  
 
-  if(NUTRIENT && QUANTITY){
+  if(QUANTITY !== -1){
     
     
     
@@ -71,6 +66,20 @@ function NutrientCard(props) {
       </div>
 
     )
+  }
+
+  else{
+
+    return(
+  
+      <div className='card'>
+        <span className='error-message'>
+          ERROR, couldn't fetch nutrient quantity
+        </span>
+      </div>
+
+    )
+
   }
 
 }

@@ -6,6 +6,11 @@ import Logo from "../../../data/Group.png"
 //import { Link } from 'react-router-dom';
 
 
+
+/**
+ * Creates a responsive top navbar with menu and logo (see maquette)
+ * @returns {object} returns the created JSX object 
+ */
 function Nav(props) {
 
   return(

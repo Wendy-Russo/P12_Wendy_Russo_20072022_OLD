@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 import { create, schemeBuGn, select, arc } from 'd3';
 import "./BarChartDailyActivity.scss";
 
+/**
+ * Creates an array of chosen length, filled with "0"
+ * @param {number} LENGTH - sets the length of the created array
+ * @returns {array} returns the created array
+ */
 function makeArray(LENGTH){
 
   const ARRAY = [];
@@ -13,11 +18,16 @@ function makeArray(LENGTH){
   return ARRAY;
 }
 
+/**
+ * Creates a barChart for daily weight and burned calories, with tooltip and legend (see maquette)
+ * @param {object} props - must contain a "sessions" array proprety containing "calories" and "kilogram" sub propreties
+ * @returns {object} returns the created JSX object 
+ */
 function BarChartDailyActivity(props) {
 
   const SESSIONS = props.sessions;
 
-  if(!document.querySelector(".barChart-svg") && SESSIONS){
+  if(!document.querySelector(".barChart-svg") && SESSIONS !== -1){
 
     //console.log(SESSIONS)
 
@@ -235,6 +245,18 @@ function BarChartDailyActivity(props) {
       .selectAll(".stroke-light-grey")
       .attr("stroke", "#dedede")
   
+  }
+
+  else if (SESSIONS === -1){
+    return(
+      <>
+        <div className="barChart-container">
+          <span className='error-message'>
+            ERROR, couldn't fetch sessions data
+          </span>
+        </div>
+      </>
+    )
   }
 
   //console.log(SESSIONS)

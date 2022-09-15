@@ -2,7 +2,16 @@ import React from 'react';
 import { select, text} from 'd3';
 import "./RadialChart.scss";
 
-function regularHexagon(POLY_ANGLE,reScale,radius) {
+const POLY_ANGLE = 2 * Math.PI / 6
+
+
+/**
+ * Creates a hexagon of the right size, must be used in an SVG path's "d" attribute
+ * @param {number} reScale - will multiply the radius, usefull to scale the entire chart 
+ * @param {number} radius - desired radius, in pixels
+ * @returns {object} returns the created JSX object 
+ */
+function regularHexagon(reScale,radius) {
 
   const SIZE = reScale * radius;
   return `
@@ -15,16 +24,20 @@ function regularHexagon(POLY_ANGLE,reScale,radius) {
   Z`
 }
 
+/**
+ * Creates a radial (spider) chart for 6 types of performance , with a legend and no tooltip (see maquette)
+ * @param {object} props - "props.perf.data" must be an array containing a "value" attribute for each performance type
+ * @returns {object} returns the created JSX object 
+ */
 function RadialChart(props) {
 
   const PERFORMANCE = props.perf;
   const P_DATA = PERFORMANCE.data;
   const WIDTH = 200;
   const HEIGHT = 200;
-  const POLY_ANGLE = 2 * Math.PI / 6
-  const TEXT_OFFSET_Y = 5;
+  const TEXT_OFFSET_Y = 2.5;
 
-  if(!document.querySelector("#radal-svg") && P_DATA){
+  if(!document.querySelector("#radal-svg") && PERFORMANCE !== -1){
 
     const SCALE = 0.3;
     const SCALE_1 = P_DATA[0].value * SCALE; //BOTTOM RIGHT
@@ -46,35 +59,35 @@ function RadialChart(props) {
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(POLY_ANGLE,SCALE,250))
+      .attr("d",regularHexagon(SCALE,250))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(POLY_ANGLE,SCALE,187.5))
+      .attr("d",regularHexagon(SCALE,187.5))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(POLY_ANGLE,SCALE,125))
+      .attr("d",regularHexagon(SCALE,125))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(POLY_ANGLE,SCALE,62.5))
+      .attr("d",regularHexagon(SCALE,62.5))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(POLY_ANGLE,SCALE,31.25))
+      .attr("d",regularHexagon(SCALE,31.25))
       .attr("stroke","white")
       .attr("fill","none")
 
@@ -102,7 +115,7 @@ function RadialChart(props) {
       .attr("fill", "white")
 
     const TEXT_SCALE_X = 95;
-    const TEXT_SCALE_Y = 90;
+    const TEXT_SCALE_Y = 85;
 
     TEXT
       .append("text")
@@ -146,15 +159,28 @@ function RadialChart(props) {
       .attr("dy",Math.cos(POLY_ANGLE*9) * TEXT_SCALE_Y + TEXT_OFFSET_Y)
       .text("Intensité")
 
+    return(
+      <>
+        <div className='radalChart-container square-chart'>
+  
+        </div>
+      </>
+    )
+
   }
 
-  return(
-    <>
-      <div className='radalChart-container square-chart'>
-
-      </div>
-    </>
-  )
+  else if (PERFORMANCE === -1){
+    return(
+      <>
+        <div className='radalChart-container square-chart'>
+          <span className='error-message'>
+            ERROR, couldn't fetch performance data
+          </span>
+        </div>
+      </>
+    )
+  }
+  
 }
 
 export default RadialChart

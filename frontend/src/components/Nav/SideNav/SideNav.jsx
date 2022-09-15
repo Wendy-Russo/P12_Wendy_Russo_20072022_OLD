@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import './SideNav.scss';
-//import Logo from "../../../data/Group.png"
 import Weight from "../../../data/icons/weight.svg"
 import Bike from "../../../data/icons/bike.svg"
 import Swim from "../../../data/icons/swim.svg"
 import Meditate from "../../../data/icons/meditate.svg"
 
-//import { Link } from 'react-router-dom';
 
-
-function SideNav(props) {
+/**
+ * Creates a responsive side navbar with copyright and icons (see maquette)
+ * @returns {object} returns the created JSX object 
+ */
+function SideNav() {
 
   return(
     <>

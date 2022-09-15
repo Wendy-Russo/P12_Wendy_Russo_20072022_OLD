@@ -39,3 +39,9 @@ body{
 .chart{
     border-radius: 5px;
 }
+
+.error-message{
+    font-weight: bolder;
+    color: red;
+    text-transform: uppercase;
+}

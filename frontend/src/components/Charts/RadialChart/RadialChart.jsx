@@ -40,13 +40,15 @@ function RadialChart(props) {
 
   if(!document.querySelector("#radal-svg") && !(PERFORMANCE === -1)){
 
-    const SCALE = 0.3;
-    const SCALE_1 = P_DATA[0].value * SCALE; //BOTTOM RIGHT
-    const SCALE_2 = P_DATA[1].value * SCALE;  //TOP RIGHT
-    const SCALE_3 = P_DATA[2].value * SCALE;  //TOP
-    const SCALE_4 = P_DATA[3].value * SCALE;  //TOP LEFT 
-    const SCALE_5 = P_DATA[4].value * SCALE;  //BOTTOM LEFT
-    const SCALE_6 = P_DATA[5].value * SCALE;  //BOTTOM
+    const MAX = Math.max( P_DATA[0].value, P_DATA[1].value, P_DATA[2].value, P_DATA[3].value, P_DATA[4].value, P_DATA[5].value)
+    const SCALE = 0.36;
+
+    const SCALE_1 = P_DATA[0].value / MAX * 200 * SCALE; //BOTTOM RIGHT
+    const SCALE_2 = P_DATA[1].value / MAX * 200 * SCALE;  //TOP RIGHT
+    const SCALE_3 = P_DATA[2].value / MAX * 200 * SCALE;  //TOP
+    const SCALE_4 = P_DATA[3].value / MAX * 200 * SCALE;  //TOP LEFT 
+    const SCALE_5 = P_DATA[4].value / MAX * 200 * SCALE;  //BOTTOM LEFT
+    const SCALE_6 = P_DATA[5].value / MAX * 200 * SCALE;  //BOTTOM
 
     const SVG = select(".radalChart-container")
       .append("svg")
@@ -60,37 +62,51 @@ function RadialChart(props) {
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(SCALE,250))
+      .attr("d",regularHexagon(SCALE,25))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(SCALE,187.5))
+      .attr("d",regularHexagon(SCALE,25))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(SCALE,125))
+      .attr("d",regularHexagon(SCALE,50))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(SCALE,62.5))
+      .attr("d",regularHexagon(SCALE,100))
       .attr("stroke","white")
       .attr("fill","none")
 
     SVG
       .append("g")
       .append("path")
-      .attr("d",regularHexagon(SCALE,31.25))
+      .attr("d",regularHexagon(SCALE,150))
       .attr("stroke","white")
       .attr("fill","none")
+
+    SVG
+      .append("g")
+      .append("path")
+      .attr("d",regularHexagon(SCALE,200))
+      .attr("stroke","white")
+      .attr("fill","none")
+
+    
+
+    
+    
+
+    
 
     SVG
       .append("g")

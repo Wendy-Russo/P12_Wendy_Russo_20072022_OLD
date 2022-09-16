@@ -188,8 +188,8 @@ function BarChartDailyActivity(props) {
     G
       .append("rect")
       .attr("class","fill-dark-red")
-      .attr("x", (elem,id) => id * BAR_SPACING + BAR_SPACING * 0.25 )
-      .attr("y", -MAX_BAR_HEIGHT - MARGIN_Y - 35 )
+      .attr("x", (elem,id) => (id + (id === 6 ? -0.6 : +1.1)) * BAR_SPACING )
+      .attr("y", -MAX_BAR_HEIGHT - MARGIN_Y)
       .attr("width", BAR_SPACING * 0.5)
       .attr("height", 30)
       .attr("rx", 3)
@@ -198,8 +198,8 @@ function BarChartDailyActivity(props) {
       G
         .append("text")
         .attr("class","bar_tooltip_text text-center white fw-500 fs-10")
-        .attr("x", (elem,id) => id * BAR_SPACING + BAR_SPACING * 0.5 )
-        .attr("y", -MAX_BAR_HEIGHT - MARGIN_Y - (ID ? 22 : 8.5))
+        .attr("x", (elem,id) => (id + (id === 6 ? -0.35 : +1.35)) * BAR_SPACING )
+        .attr("y", -MAX_BAR_HEIGHT - MARGIN_Y - (ID ? -13 : -25))
         .text( (elem,id) => (ID ? SESSIONS[id].kilogram  + " kg" : SESSIONS[id].calories + " Kcal" ))
     }
 
@@ -246,10 +246,8 @@ function BarChartDailyActivity(props) {
 
 
   return(
-    <>
-      <div className="barChart-container">
-      </div>
-    </>
+    <div className="barChart-container">
+    </div>
   )
 }
 

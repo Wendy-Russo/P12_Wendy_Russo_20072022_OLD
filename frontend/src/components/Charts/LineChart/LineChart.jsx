@@ -96,9 +96,9 @@ function LineChart(props) {
     
     TOOLTIP_GROUPS
       .append("rect")
-      .attr("x",(elem,id) =>  id *SPACING_DAYS)
+      .attr("x",(elem,id) =>  (id + 0.5) *SPACING_DAYS)
       .attr("y",0)
-      .attr("width",SPACING_DAYS)
+      .attr("width",WIDTH)
       .attr("height",HEIGHT)
       .style("opacity",0.2)
 

@@ -122,30 +122,14 @@ function PieChartScore(props) {
         .attr("fill", "#FF0000")
 
     }
-
-    return(
-      <>
-        <div className='pieChart-container square-chart'>
-          
-        </div>
-      </>
-    )
   }
 
-  else{
-    return(
-      <>
-        <div className='pieChart-container square-chart'>
-          <span className='error-message'>
-            ERROR, couldn't fetch score
-          </span>
-        </div>
-      </>
-    )
-  }
-
-  
-  
+  return(
+    <>
+      <div className='pieChart-container square-chart'>
+      </div>
+    </>
+  )  
 }
 
 export default PieChartScore

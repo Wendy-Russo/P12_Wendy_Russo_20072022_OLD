@@ -1,0 +1,14 @@
+.error-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.error-message{
+    width: max-content;
+    height: fit-content;
+    margin: auto;
+    font-weight: bolder;
+    color: red;
+    text-transform: uppercase;
+}

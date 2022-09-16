@@ -15,7 +15,7 @@ function LineChart(props) {
 
   const AVERAGE = props.average;
   
-  if(!document.querySelector("#lineChart-svg") && AVERAGE !== -1){
+  if(!document.querySelector("#lineChart-svg") && !(AVERAGE === -1)){
 
     let AVG_MAX = AVERAGE.sessions[0].sessionLength;
     for (let id = 0; id < AVERAGE.sessions.length-1; id++) {
@@ -160,28 +160,15 @@ function LineChart(props) {
           select(this).style("opacity",0)
         })
 
-    return(
-      <>
-        <div className='lineChart-container square-chart'>
-  
-        </div>
-      </>
-    )
+    
   }
 
-  else if( AVERAGE === -1){
-    return(
-      <>
-        <div className='lineChart-container square-chart'>
-          <span className='error-message'>
-            ERROR, couldn't fetch average sessions data
-          </span>
-        </div>
-      </>
-    )
-  }
-
-  
+  return(
+    <>
+      <div className='lineChart-container square-chart'>
+      </div>
+    </>
+  )  
 }
 
 export default LineChart

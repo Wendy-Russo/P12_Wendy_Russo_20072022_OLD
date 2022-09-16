@@ -73,9 +73,6 @@ function NutrientCard(props) {
     return(
   
       <div className='card'>
-        <span className='error-message'>
-          ERROR, couldn't fetch nutrient quantity
-        </span>
       </div>
 
     )

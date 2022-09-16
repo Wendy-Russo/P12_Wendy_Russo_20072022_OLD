@@ -33,11 +33,12 @@ function RadialChart(props) {
 
   const PERFORMANCE = props.perf;
   const P_DATA = PERFORMANCE.data;
+
   const WIDTH = 200;
   const HEIGHT = 200;
   const TEXT_OFFSET_Y = 2.5;
 
-  if(!document.querySelector("#radal-svg") && PERFORMANCE !== -1){
+  if(!document.querySelector("#radal-svg") && !(PERFORMANCE === -1)){
 
     const SCALE = 0.3;
     const SCALE_1 = P_DATA[0].value * SCALE; //BOTTOM RIGHT
@@ -158,29 +159,15 @@ function RadialChart(props) {
       .attr("dx",Math.sin(POLY_ANGLE*9) * TEXT_SCALE_X)
       .attr("dy",Math.cos(POLY_ANGLE*9) * TEXT_SCALE_Y + TEXT_OFFSET_Y)
       .text("Intensité")
-
-    return(
-      <>
-        <div className='radalChart-container square-chart'>
-  
-        </div>
-      </>
-    )
-
   }
 
-  else if (PERFORMANCE === -1){
-    return(
-      <>
-        <div className='radalChart-container square-chart'>
-          <span className='error-message'>
-            ERROR, couldn't fetch performance data
-          </span>
-        </div>
-      </>
-    )
-  }
-  
+  return(
+    <>
+      <div className='radalChart-container square-chart'>
+      </div>
+    </>
+  )
+    
 }
 
 export default RadialChart

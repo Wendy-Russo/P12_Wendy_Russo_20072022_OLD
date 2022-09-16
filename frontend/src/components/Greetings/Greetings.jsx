@@ -26,20 +26,6 @@ function Greetings(props) {
         </section>
       </>
     )
-
-  }
-  else{
-
-    return(
-      <>
-        <section className="greetings-section" >
-          <span className='error-message'>
-            ERROR, couldn't fetch first name
-          </span>
-        </section>
-      </>
-    )
-
   }
 }
 

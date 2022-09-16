@@ -8,6 +8,8 @@ import BarChartDailyActivity from '../components/Charts/BarChartDailyActivity/Ba
 import PieChartScore from "../components/Charts/PieChartScore/PieChartScore"
 import RadialChart from '../components/Charts/RadialChart/RadialChart';
 import LineChart from '../components/Charts/LineChart/LineChart';
+import Error from '../components/Error/Error.jsx';
+
 import {getUserData} from '../service/getUserData';
 
 const USER = 12; //12 or 18
@@ -24,10 +26,10 @@ function Dashboard(){
   const [averageData, setAverageData] = useState(0);
 
   useEffect(() => {
-    //getUserData(USER,"main").then(DATA => setMainData(DATA));
-    //getUserData(USER,"activity").then(DATA => setActivityData(DATA));
-    //getUserData(USER,"performance").then(DATA => setPerfData(DATA));
-    //getUserData(USER,"average").then(DATA => setAverageData(DATA));
+     getUserData(USER,"average").then(DATA => setAverageData(DATA));
+     getUserData(USER,"main").then(DATA => setMainData(DATA));
+     getUserData(USER,"activity").then(DATA => setActivityData(DATA));
+     getUserData(USER,"performance").then(DATA => setPerfData(DATA));
   }, [])
 
   const FIRST_NAME = mainData.userInfos ? mainData.userInfos.firstName : -1 ;
@@ -44,36 +46,62 @@ function Dashboard(){
 
   const AVG_DATA = averageData.sessions ? averageData : -1 ;
 
-  return (
-    <>
-      <header>
-        <TopNav/>
-        <SideNav/>
-      </header>
+  if(mainData && activityData && perfData && averageData){
+    console.clear();
+    return (
+      <>
+        <header>
+          <TopNav/>
+          <SideNav/>
+        </header>
+  
+        <main>
+  
+          <Greetings  firstName={FIRST_NAME} />
+  
+          <section className="charts-section" >
+            <BarChartDailyActivity sessions={SESSIONS} />
+            <LineChart average={AVG_DATA}/>
+            <RadialChart perf={P_DATA}/>
+            <PieChartScore score={USER === 18 ? SCORE_18 : SCORE_12} />
+          </section>
+  
+          <section className="cards-section" >
+            <NutrientCard quantity={CAL_COUNT}  nutrient="calories"  />
+            <NutrientCard quantity={PROT_COUNT} nutrient="proteines" />
+            <NutrientCard quantity={CARB_COUNT} nutrient="glucides"  />
+            <NutrientCard quantity={LIP_COUNT}  nutrient="lipides"   />
+          </section>
+  
+        </main>
+        
+      </>
+  
+    );
+  }
 
-      <main>
+  else if (!(mainData && activityData && perfData && averageData)){
 
-        <Greetings  firstName={FIRST_NAME} />
+    !mainData &&console.info("ERROR : couldn't fetch main data from backend")
+    !activityData &&console.info("ERROR : couldn't fetch activity data from backend")
+    !perfData &&console.info("ERROR : couldn't fetch performance data from backend")
+    !averageData &&console.info("ERROR : couldn't fetch average session data from backend")
 
-        <section className="charts-section" >
-          <BarChartDailyActivity sessions={SESSIONS} />
-          <LineChart average={AVG_DATA}/>
-          <RadialChart perf={P_DATA}/>
-          <PieChartScore score={USER === 18 ? SCORE_18 : SCORE_12} />
-        </section>
-
-        <section className="cards-section" >
-          <NutrientCard quantity={CAL_COUNT}  nutrient="calories"  />
-          <NutrientCard quantity={PROT_COUNT} nutrient="proteines" />
-          <NutrientCard quantity={CARB_COUNT} nutrient="glucides"  />
-          <NutrientCard quantity={LIP_COUNT}  nutrient="lipides"   />
-        </section>
-
-      </main>
-      
-    </>
-
-  );
+    return (
+      <>
+        <header>
+          <TopNav/>
+          <SideNav/>
+        </header>
+  
+        <main>
+          <Error/>
+        </main>
+        
+      </>
+  
+    );
+  }
 }
 
 export default Dashboard;

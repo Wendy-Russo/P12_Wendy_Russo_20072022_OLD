@@ -27,9 +27,7 @@ function BarChartDailyActivity(props) {
 
   const SESSIONS = props.sessions;
 
-  if(!document.querySelector(".barChart-svg") && SESSIONS !== -1){
-
-    //console.log(SESSIONS)
+  if(!document.querySelector(".barChart-svg") && !(SESSIONS === -1)){
 
     let calorieMax = SESSIONS[0].calories;
     for (let id = 0; id < SESSIONS.length-1; id++) {
@@ -244,27 +242,12 @@ function BarChartDailyActivity(props) {
     SVG
       .selectAll(".stroke-light-grey")
       .attr("stroke", "#dedede")
-  
   }
 
-  else if (SESSIONS === -1){
-    return(
-      <>
-        <div className="barChart-container">
-          <span className='error-message'>
-            ERROR, couldn't fetch sessions data
-          </span>
-        </div>
-      </>
-    )
-  }
-
-  //console.log(SESSIONS)
 
   return(
     <>
       <div className="barChart-container">
-
       </div>
     </>
   )
